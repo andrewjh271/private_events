@@ -17,7 +17,17 @@ class User < ApplicationRecord
   validates :email, :username, presence: true
   validates :username, uniqueness: true
 
+  has_many :events, dependent: :destroy
+  has_many :invitations,
+    foreign_key: :recipient_id,
+    dependent: :destroy
   
+  has_many :confirmations,
+    -> { where rsvp: 'ACCEPTED' },
+    class_name: :Invitation,
+    foreign_key: :recipient_id
 
-
+  has_many :commitments,
+    through: :confirmations,
+    source: :event
 end
