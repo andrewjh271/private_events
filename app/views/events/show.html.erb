@@ -43,6 +43,8 @@
   </ul>
 <% end %>
 
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Update Invitations', edit_event_invitations_path(@event) %> |
+<% if @event.host_id == current_user.try(:id) %>
+  <%= link_to 'Edit', edit_event_path(@event) %> |
+  <%= link_to 'Update Invitations', edit_event_invitations_path(@event) %> |
+<% end %>
 <%= link_to 'Back', events_path %>

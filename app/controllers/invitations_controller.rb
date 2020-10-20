@@ -1,8 +1,10 @@
 class InvitationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_invitation, except: [:create, :new, :edit, :update]
+
   before_action :set_event, only: [:new, :create, :edit, :update]
-  before_action :require_host!, only: [:create, :destroy]
+  before_action :require_host!, only: [:new, :create, :edit, :update]
+
+  before_action :set_invitation, only: [:accept, :pend, :decline]
   before_action :require_recipient!, only: [:accept, :pend, :decline]
 
   def new
@@ -32,10 +34,10 @@ class InvitationsController < ApplicationController
     redirect_to event_url(@event)
   end
 
-  def destroy
-    @invitation.destroy
-    redirect_back fallback_location: user_path
-  end
+  # def destroy
+  #   @invitation.destroy
+  #   redirect_back fallback_location: user_path
+  # end
 
   def accept
     @invitation.update(rsvp: 'ACCEPTED')
@@ -68,7 +70,7 @@ class InvitationsController < ApplicationController
 
   def require_host!
     unless current_user.try(:id) == @event.host_id
-      flash[:alert] = 'You are not authorized to edit this invitation!'
+      flash[:alert] = 'You are not authorized to edit invitations for this event!'
       redirect_to root_url
     end
   end
