@@ -4,7 +4,7 @@
 #
 #  id          :bigint           not null, primary key
 #  name        :string           not null
-#  date        :date             not null
+#  date        :datetime         not null
 #  location    :string           not null
 #  description :text
 #  host_id     :bigint           not null

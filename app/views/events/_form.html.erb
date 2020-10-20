@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= form.label :date %>
-    <%= form.date_select :date %>
+    <%= form.datetime_select :date %>
   </div>
 
   <div class="field">
@@ -28,15 +28,10 @@
 
   <div class="field">
     <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :host_id %>
-    <%= form.text_field :host_id %>
+    <%= form.text_area :description, rows: '10', cols: '35' %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: 'important-button' %>
   </div>
 <% end %>
