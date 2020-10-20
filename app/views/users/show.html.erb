@@ -1,0 +1,5 @@
+<h3> <%= @user.username %> </h3>
+
+<%= render @user.invitations.includes(:event) %>
+
+<%= link_to 'Edit Account', edit_user_registration_path %>

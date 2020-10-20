@@ -10,8 +10,40 @@
   </head>
 
   <body>
-    <p class='notice'><%= notice %></p>
-    <p class='alert'><%= alert %></p>
-    <%= yield %>
+    <header>
+      <div class='header-left'>
+        <button class='header-button border-right'>
+          <%= link_to 'Home', root_path, class: 'header-item' %>
+        </button><!--
+        --><button class='header-button'>
+          <%= link_to 'About', about_path, class: 'header-item' %>
+        </button>
+      </div>
+      <div class='header-right'>
+        <button class='header-button border-right'>
+          <%= link_to 'New Event', new_event_path, class: 'header-item' %>
+        </button><!--
+        <% if user_signed_in? %>
+          --><button class='header-button border-right'>
+            <%= link_to current_user.username, user_path, class: 'header-item' %>
+          </button><!--
+          --><button class='header-button'>
+            <%= link_to 'Logout', destroy_user_session_path, class: 'header-item', method: :delete %>
+          </button>
+        <% else %>
+          --><button class='header-button border-right'>
+            <%= link_to 'Login', new_user_session_path, class: 'header-item' %>
+          </button><!--
+          --><button class='header-button'>
+            <%= link_to 'Sign Up', new_user_registration_path, class: 'header-item' %>
+          </button>
+        <% end %>
+      </div>
+    </header>
+    <div class='page-body'>
+      <p id="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+    </div>
   </body>
 </html>

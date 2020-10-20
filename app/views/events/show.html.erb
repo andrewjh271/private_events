@@ -22,8 +22,26 @@
 
 <p>
   <strong>Host:</strong>
-  <%= @event.host_id %>
+  <%= @event.host.username %>
 </p>
+
+<p>
+  <strong>Confirmed Guests (<%= @event.guests.count %>) :</strong>
+  <ul>
+    <% @event.guests.each do |guest| %>
+      <li><%= guest.username %></li>
+    <% end %>
+  </ul>
+</p>
+
+<% if current_user.try(:id) == @event.host_id %>
+  <strong>All Invitations:</strong>
+  <ul>
+    <% @event.invitations.includes(:recipient).each do |invitation| %>
+      <li class='<%= invitation.rsvp %> invitation-list-item'><%= invitation.recipient.username %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>

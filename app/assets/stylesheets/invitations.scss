@@ -1,0 +1,28 @@
+.invitation {
+  border: 1px black solid;
+  padding: 1vh;
+}
+
+.current-status {
+  background: rgba(161, 161, 233, 0.863);
+  box-shadow: 1px 3px 8px #6681a7d1;
+}
+
+.current-status:hover {
+  background: red;
+}
+
+/* default for button_to buttons */
+
+input[type="submit" i] {
+  border: none;
+}
+
+input[type="submit" i]:hover {
+  cursor: pointer;
+}
+
+.button_to {
+  display: inline;
+  border: none;
+}

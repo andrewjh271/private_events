@@ -13,3 +13,127 @@
  *= require_tree .
  *= require_self
  */
+
+ html, body {
+  margin:0;
+  padding:0;
+  width:100%;
+  background-image: linear-gradient(45deg,#e2e6ea, #dfedef, #eff5fc);
+}
+
+/* header */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  height: 5vh;
+  background-color: #4267b2;
+  margin-bottom: 4vh;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.header-button {
+  background-color: transparent;
+  border: none;
+  height: 100%;
+}
+
+.header-button:hover {
+  background: rgba(0, 0, 0, .1);
+  cursor: pointer;
+}
+
+.header-button:focus {
+  outline: none;
+}
+
+.header-item {
+  color: white;
+}
+
+.header-item:hover {
+  text-decoration: none;
+}
+
+.border-right {
+  border-right: 1px solid rgba(0, 0, 0, 0.171);
+}
+
+/* flash */
+
+#notice {
+  position: fixed;
+  top: 6vh;
+  color: rgb(22, 129, 76);
+  padding: 8px;
+}
+
+.alert {
+  position: fixed;
+  top: 6vh;
+  color: red;
+  padding: 8px;
+}
+
+/* links */
+
+a {
+  text-decoration: none;
+  color: #385898;
+}
+
+a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+/* container for pages other than root */
+
+.page-body {
+  height: 91vh;
+  padding: 2vh 5vw 0 5vw;
+  box-sizing: border-box;
+}
+
+/* submit, create, edit, cancel, etc. */
+
+.important-button {
+  background-color: #4267b27c !important;
+  border-radius: 10px;
+  height: 25px;
+}
+
+.important-button:hover {
+  background-color: #4267b2 !important;
+  color: white;
+}
+
+.important-button:focus {
+  outline: none;
+  background-color: #2758bb !important;
+  box-shadow: 1px 3px 8px #6681a7d1;
+  color: white;
+}
+
+.cancel {
+  background-color: #f56d6d !important;
+  border-radius: 10px;
+  height: 25px;
+}
+
+.cancel:hover {
+  background-color: #960101 !important;
+  color: white;
+}
+
+.cancel:focus {
+  outline: none;
+  background-color: #3a0000 !important;
+  box-shadow: 1px 3px 8px #6681a7d1;
+  color: white;
+}
