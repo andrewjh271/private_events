@@ -17,7 +17,10 @@ class User < ApplicationRecord
   validates :email, :username, presence: true
   validates :username, uniqueness: true
 
-  has_many :events, dependent: :destroy
+  has_many :events,
+    foreign_key: :host_id,
+    dependent: :destroy
+
   has_many :invitations,
     foreign_key: :recipient_id,
     dependent: :destroy
