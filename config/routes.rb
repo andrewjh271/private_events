@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   root to: 'events#index'
   
   devise_for :users
-  resource :user, only: :show
+  resource :user, only: :show, as: :profile
+  resources :users, only: :show
   
   get 'about', to: 'application#about'
   

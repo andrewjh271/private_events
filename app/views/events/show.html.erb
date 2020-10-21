@@ -29,7 +29,7 @@
   <strong>Confirmed Guests (<%= @event.guests.count %>) :</strong>
   <% @event.guests.each do |guest| %>
     <div class='invitation-list-item ACCEPTED'>
-      <li><%= guest.username %></li>
+      <li><%= link_to guest.username, guest %></li>
       <i class="fas fa-check"></i>
     </div>
   <% end %>
@@ -40,7 +40,7 @@
     <strong>All Invitations:</strong>
     <% @event.invitations.includes(:recipient).each do |invitation| %>
       <div class="invitation-list-item <%= invitation.rsvp %>">
-        <li><%= invitation.recipient.username %></li>
+        <li><%= link_to invitation.recipient.username, user_path(invitation.recipient_id) %></li>
         <% if invitation.rsvp == 'ACCEPTED' %>
           <i class="fas fa-check"></i>
         <% elsif invitation.rsvp == 'PENDING' %>
