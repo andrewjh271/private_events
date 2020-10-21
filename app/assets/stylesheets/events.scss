@@ -3,12 +3,16 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 .invitation-list-item {
-  width: 50px;
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+  padding: 6px;
+  list-style-type: none;
 }
 
 .ACCEPTED {
   background-color: lightblue;
+  font-weight: 600;
 }
 
 .PENDING {

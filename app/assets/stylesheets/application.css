@@ -28,7 +28,7 @@ header {
   justify-content: space-between;
   height: 5vh;
   background-color: #4267b2;
-  margin-bottom: 4vh;
+  margin-bottom: 2vh;
   padding: 5px;
   box-sizing: border-box;
 }
@@ -58,6 +58,13 @@ header {
 
 .border-right {
   border-right: 1px solid rgba(0, 0, 0, 0.171);
+}
+
+/* container for pages other than root */
+
+.page-body {
+  padding: 1vh 5vw 2vw 5vw;
+  box-sizing: border-box;
 }
 
 /* flash */
@@ -90,14 +97,6 @@ a:hover {
 
 a:visited {
   text-decoration: none;
-}
-
-/* container for pages other than root */
-
-.page-body {
-  height: 91vh;
-  padding: 2vh 5vw 0 5vw;
-  box-sizing: border-box;
 }
 
 /* submit, create, edit, cancel, etc. */

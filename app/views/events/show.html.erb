@@ -27,21 +27,32 @@
 
 <p>
   <strong>Confirmed Guests (<%= @event.guests.count %>) :</strong>
-  <ul>
-    <% @event.guests.each do |guest| %>
+  <% @event.guests.each do |guest| %>
+    <div class='invitation-list-item ACCEPTED'>
       <li><%= guest.username %></li>
-    <% end %>
-  </ul>
+      <i class="fas fa-check"></i>
+    </div>
+  <% end %>
 </p>
 
 <% if current_user.try(:id) == @event.host_id %>
-  <strong>All Invitations:</strong>
-  <ul>
+  <p>
+    <strong>All Invitations:</strong>
     <% @event.invitations.includes(:recipient).each do |invitation| %>
-      <li class='<%= invitation.rsvp %> invitation-list-item'><%= invitation.recipient.username %></li>
+      <div class="invitation-list-item <%= invitation.rsvp %>">
+        <li><%= invitation.recipient.username %></li>
+        <% if invitation.rsvp == 'ACCEPTED' %>
+          <i class="fas fa-check"></i>
+        <% elsif invitation.rsvp == 'PENDING' %>
+          <i class="far fa-clock"></i>
+        <% else %>
+          <i class="fas fa-times"></i>
+        <% end %>
+      </div>
     <% end %>
-  </ul>
+  </p>
 <% end %>
+<br>
 
 <% if @event.host_id == current_user.try(:id) %>
   <%= link_to 'Edit', edit_event_path(@event) %> |
