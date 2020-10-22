@@ -27,7 +27,7 @@
 
 <p>
   <strong>Confirmed Guests (<%= @event.guests.count %>) :</strong>
-  <% @event.guests.each do |guest| %>
+  <% @event.guests.order(:username).each do |guest| %>
     <div class='invitation-list-item ACCEPTED'>
       <li><%= link_to guest.username, guest %></li>
       <i class="fas fa-check"></i>
@@ -38,7 +38,7 @@
 <% if current_user.try(:id) == @event.host_id %>
   <p>
     <strong>All Invitations:</strong>
-    <% @event.invitations.includes(:recipient).each do |invitation| %>
+    <% @event.invitations.includes(:recipient).order(:username).references(:recipient).each do |invitation| %>
       <div class="invitation-list-item <%= invitation.rsvp %>">
         <li><%= link_to invitation.recipient.username, user_path(invitation.recipient_id) %></li>
         <% if invitation.rsvp == 'ACCEPTED' %>

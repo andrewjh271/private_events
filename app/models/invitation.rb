@@ -14,12 +14,10 @@ class Invitation < ApplicationRecord
 
   validates :rsvp, presence: true
   validates :rsvp, inclusion: { in: %w[ACCEPTED PENDING DECLINED] }, if: -> { rsvp }
+  validates :event_id, uniqueness: { scope: :recipient_id }
 
   belongs_to :event
   belongs_to :recipient, class_name: :User
-
-  # scope :upcoming, -> { includes(:event).where { event.upcoming } }
-  # scope :past, -> { event.past }
 
   scope :upcoming, -> { joins(:event).merge(Event.upcoming) }
   scope :past, -> { joins(:event).merge(Event.past) }
@@ -34,6 +32,10 @@ class Invitation < ApplicationRecord
 
   def decline!
     update(rsvp: 'DECLINED')
+  end
+
+  def recipient_name
+    recipient.username
   end
 
   private

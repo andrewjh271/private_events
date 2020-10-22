@@ -8,11 +8,10 @@ class InvitationsController < ApplicationController
   before_action :require_recipient!, only: [:accept, :pend, :decline]
 
   def new
-    # @event = Event.find_by(id: params[:event_id])
+    render :new
   end
 
   def create
-    # fail
     params[:recipient].select { |_k, v| v == '1' }.keys.map(&:to_i).each do |user_id|
       @event.invitations.find_or_create_by(recipient_id: user_id)
     end
@@ -20,24 +19,33 @@ class InvitationsController < ApplicationController
   end
 
   def edit
-
+    if @event.date < Time.now
+      flash.notice = 'You cannot update invitations for past events.'
+      redirect_to @event
+    else
+      render :edit
+    end
   end
 
   def update
+    no_uninvites = []
     params[:recipient].each do |user_id, value|
       if value == '1'
         @event.invitations.find_or_create_by(recipient_id: user_id.to_i)
       else
-        @event.invitations.find_by(recipient_id: user_id.to_i).try(:destroy)
+        invitation = @event.invitations.includes(:recipient).find_by(recipient_id: user_id.to_i)
+        if invitation
+          if invitation.rsvp == 'ACCEPTED'
+            no_uninvites << invitation.recipient_name
+          else
+            invitation.destroy
+          end
+        end
       end
     end
+    flash.notice = "The following guests have already commited and cannot be uninvited: #{no_uninvites.join(', ')}." unless no_uninvites.empty?
     redirect_to event_url(@event)
   end
-
-  # def destroy
-  #   @invitation.destroy
-  #   redirect_back fallback_location: user_path
-  # end
 
   def accept
     @invitation.update(rsvp: 'ACCEPTED')

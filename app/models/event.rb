@@ -14,6 +14,7 @@
 class Event < ApplicationRecord
   validates :name, :date, :location, presence: true
   validates :name, uniqueness: true
+  validate :starts_in_the_future
 
   belongs_to :host, class_name: :User
   has_many :invitations, dependent: :destroy
@@ -39,6 +40,14 @@ class Event < ApplicationRecord
 
   def date_only
     date.strftime('%b %-d %Y')
+  end
+
+  private
+
+  def starts_in_the_future
+    if date < Date.today
+      errors[:date] << 'Event date must be in the future.'
+    end
   end
 
 end
