@@ -25,4 +25,20 @@ class Event < ApplicationRecord
   has_many :guests,
     through: :confirmations,
     source: :recipient
+
+  scope :upcoming, -> { where('date > ?', Time.now) }
+  scope :past, -> { where('date < ?', Time.now) }
+
+  def host_name
+    host.username
+  end
+
+  def date_and_time
+    date.strftime('%b %-d %Y %l:%M%P')
+  end
+
+  def date_only
+    date.strftime('%b %-d %Y')
+  end
+
 end

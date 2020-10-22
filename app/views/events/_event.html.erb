@@ -1,0 +1,10 @@
+<div class='event <%= 'past' unless upcoming %>'>
+  <div class='name'><%= event.name %></div>
+  <div class='basic-info'>
+    <%= event.date_and_time %> •
+    <%= event.location %>
+  </div>
+<a href='<%= event_path(event) %>' class='show-link'>
+  <div>Info</div>
+</a>
+</div>

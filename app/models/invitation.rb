@@ -18,6 +18,12 @@ class Invitation < ApplicationRecord
   belongs_to :event
   belongs_to :recipient, class_name: :User
 
+  # scope :upcoming, -> { includes(:event).where { event.upcoming } }
+  # scope :past, -> { event.past }
+
+  scope :upcoming, -> { joins(:event).merge(Event.upcoming) }
+  scope :past, -> { joins(:event).merge(Event.past) }
+
   def accepted?
     rsvp == 'ACCEPTED'
   end

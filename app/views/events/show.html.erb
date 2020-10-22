@@ -7,7 +7,7 @@
 
 <p>
   <strong>Date:</strong>
-  <%= @event.date %>
+  <%= @event.date_and_time %>
 </p>
 
 <p>
@@ -57,5 +57,6 @@
 <% if @event.host_id == current_user.try(:id) %>
   <%= link_to 'Edit', edit_event_path(@event) %> |
   <%= link_to 'Update Invitations', edit_event_invitations_path(@event) %> |
+  <%= link_to 'Delete Event', event_path(@event), method: :delete, data: { confirm: 'Are you sure?'} %> |
 <% end %>
 <%= link_to 'Back', events_path %>

@@ -26,9 +26,10 @@
 header {
   display: flex;
   justify-content: space-between;
-  height: 5vh;
-  background-color: #4267b2;
-  margin-bottom: 3vh;
+  height: 7vh;
+  /* background-color: #4267b2; */
+  background-color: #9471af;
+  margin-bottom: 2vh;
   padding: 5px;
   box-sizing: border-box;
 }
@@ -37,6 +38,8 @@ header {
   background-color: transparent;
   border: none;
   height: 100%;
+  padding: 1vw;
+  font-size: 15px;
 }
 
 .header-button:hover {
@@ -63,6 +66,7 @@ header {
 /* container for pages other than root */
 
 .page-body {
+  min-height: 92vh;
   padding: 1vh 5vw 2vw 5vw;
   box-sizing: border-box;
 }
@@ -102,7 +106,7 @@ a:visited {
 .important-button {
   background-color: #4267b27c !important;
   border-radius: 10px;
-  height: 25px;
+  padding: 1vh !important;
 }
 
 .important-button:hover {
@@ -120,7 +124,7 @@ a:visited {
 .cancel {
   background-color: #f56d6d !important;
   border-radius: 10px;
-  height: 25px;
+  padding: 1vh !important;
 }
 
 .cancel:hover {
@@ -133,4 +137,23 @@ a:visited {
   background-color: #3a0000 !important;
   box-shadow: 1px 3px 8px #6681a7d1;
   color: white;
+}
+
+/* shared between events and invitations */
+
+.past {
+  background-color: rgb(216 216 216);
+}
+
+/* page titles */
+
+.page-title-container {
+  width: 85%;
+  margin: 0 auto 2vh auto;
+}
+
+h1 {
+  padding: 8px;
+  font-family: 'Piazzolla', serif;
+  font-size: 3em;
 }

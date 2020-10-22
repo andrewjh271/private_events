@@ -22,3 +22,63 @@
 .DECLINED {
   background-color: lightcoral;
 }
+
+.events-container {
+  margin: 0 auto 5vh auto;
+  width: 85%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1vw;
+}
+
+.event-category {
+  grid-column: 1 / 4;
+  margin: 1vh;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 1.3em;
+}
+
+.event {
+  height: fit-content;
+  margin: 1vh;
+  padding: 8px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+  box-shadow: 2px 3px 9px 0px #00000085;
+  display: grid;
+  grid-template-rows: auto 3vh 5vh;
+  grid-gap: 2vh;
+}
+
+.name {
+  font-size: 2em;
+  background-color: #4db4b752;
+  padding: .3em;
+  grid-row: 1 / 2;
+  line-height: 1;
+}
+
+.basic-info {
+  color: gray;
+  align-self: end;
+}
+
+.show-link {
+  margin: auto;
+  grid-row: 3 / 4;
+  line-height: 2;
+  width: 80%;
+  text-align: center;
+  color: black;
+  box-shadow: 0px 0px 1px 0px #3a5bca;
+}
+
+.show-link:hover {
+  text-decoration: none;
+  cursor: pointer;
+  background-color: #86aad6;
+  border: none;
+  box-shadow: 0px 0px 8px 0px #00000070;
+  color: white;
+}

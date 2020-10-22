@@ -1,28 +1,85 @@
+.invitations-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  width: 85%;
+  margin: auto;
+  grid-gap: 1vh;
+}
+
+.invitation-category {
+  grid-column: 1 / 6;
+  margin: 1vh;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 1.3em;
+}
+
 .invitation {
-  border: 1px black solid;
-  padding: 1vh;
+  display: grid;
+  height: fit-content;
+  padding: 8px;
+  margin: 1vh;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+  box-shadow: 2px 3px 9px 0px #00000085;
+  grid-gap: 1vh;
+}
+
+.invitation-name {
+  font-size: large;
+}
+
+.rsvp-actions {
+  display: flex;
+  justify-content: space-between;
+  background-color: transparent;
+  // padding: 0.8vw 1vw 0.8vw 1vw;
+}
+
+.rsvp {
+  box-shadow: 0px 0px 5px 1px #6681a7d1;
+}
+
+.rsvp:hover {
+  background: #acabac;
+  color: white;
 }
 
 .current-status {
   background: rgba(161, 161, 233, 0.863);
-  box-shadow: 1px 3px 8px #6681a7d1;
+  // box-shadow: 1px 3px 8px #6681a7d1;
+  
 }
 
 .current-status:hover {
-  background: red;
+  background: #734980;
+  color: white;
 }
 
 /* default for button_to buttons */
 
-input[type="submit" i] {
+input[type="submit"] {
   border: none;
+  padding: 0.8vw 1vw 0.8vw 1vw;
+
+  font-family: verdana, arial, helvetica, sans-serif;
+    font-size: 13px;
+    line-height: 18px;
 }
 
-input[type="submit" i]:hover {
+input[type="submit"]:hover {
   cursor: pointer;
 }
 
 .button_to {
   display: inline;
-  border: none;
+}
+
+.past-action {
+  padding: 0.8vw 1vw 0.8vw 1vw;
+  box-shadow: 0px 0px 5px 1px #6681a7d1;
+}
+
+.past-status {
+  background: rgba(161, 161, 233, 0.863);
+  // box-shadow: 1px 3px 8px #6681a7d1;
 }

@@ -14,8 +14,8 @@
     </div>
   <% end %>
   <br>
-  <%= submit_tag('Update Invitations!') %>
+  <%= submit_tag('Update Invitations!', class: 'important-button') %>
 <% end %>
 
 <br>
-<%= button_to 'Back', @event, method: :get %>
+<%= link_to 'Back', @event %>

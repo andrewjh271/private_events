@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   
   resources :events do
     # resources :invitations, only: :new
-    resource :invitations, only: [:new, :edit, :create, :update]
+    resource :invitations, except: :index
   end
 
   resources :invitations, only: [:destroy] do

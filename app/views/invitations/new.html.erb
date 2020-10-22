@@ -14,8 +14,8 @@
     </div>
   <% end %>
   <br>
-  <%= submit_tag('Invite Guests!') %>
+  <%= submit_tag('Invite Guests!', class: 'important-button') %>
 <% end %>
 
 <br>
-<%= button_to 'Now now', user_url, method: :get %>
+<%= link_to 'Now now', profile_path %>
