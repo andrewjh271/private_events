@@ -29,7 +29,7 @@ header {
   height: 7vh;
   /* background-color: #4267b2; */
   background-color: #9471af;
-  margin-bottom: 2vh;
+  /* margin-bottom: 2vh; */
   padding: 5px;
   box-sizing: border-box;
 }
@@ -73,15 +73,17 @@ header {
 
 /* flash */
 
+.flash-container {
+  background-color: #afe6fb69;
+}
+
 #notice {
-  position: fixed;
-  top: 6vh;
+  padding: 1vh;
   color: rgb(22, 129, 76);
 }
 
 .alert {
-  position: fixed;
-  top: 6vh;
+  padding: 1vh;
   color: red;
 }
 

@@ -42,9 +42,17 @@
         <% end %>
       </div>
     </header>
+    <% if notice || alert %>
+      <div class='flash-container'>
+        <% if notice %>
+          <div id="notice"><%= notice %></div>
+        <% end %>
+        <% if alert %>
+          <div class="alert"><%= alert %></div>
+        <% end %>
+      </div>
+    <% end %>
     <div class='page-body'>
-      <p id="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
       <%= yield %>
     </div>
   </body>
