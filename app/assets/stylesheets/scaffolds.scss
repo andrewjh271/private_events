@@ -13,16 +13,6 @@ pre {
   padding: 10px;
   font-size: 11px; }
 
-// a {
-//   color: #000; }
-
-// a:visited {
-//   color: #666; }
-
-// a:hover {
-//   color: #fff;
-//   background-color: #000; }
-
 th {
   padding-bottom: 5px; }
 
@@ -38,12 +28,14 @@ div.actions {
 
 .field_with_errors {
   padding: 2px;
-  background-color: red;
-  display: table; }
+  background-color: #ff00007a;
+  box-shadow: 0px 3px 11px 2px #ff0000b0;
+  display: table;
+}
 
 #error_explanation {
   width: 450px;
-  border: 2px solid red;
+  border: 2px solid #f56363;
   padding: 7px 7px 0;
   margin-bottom: 20px;
   background-color: #f0f0f0; }
@@ -54,7 +46,7 @@ div.actions {
   padding: 5px 5px 5px 15px;
   font-size: 12px;
   margin: -7px -7px 0;
-  background-color: #c00;
+  background-color: #a01111;
   color: #fff; }
 
 #error_explanation ul li {
