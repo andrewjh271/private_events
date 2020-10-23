@@ -1,41 +1,23 @@
-<p>
-  <strong>Name:</strong>
-  <%= @event.name %>
-</p>
-
-<p>
-  <strong>Date:</strong>
-  <%= @event.date_and_time %>
-</p>
-
-<p>
-  <strong>Location:</strong>
-  <%= @event.location %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @event.description %>
-</p>
-
-<p>
-  <strong>Host:</strong>
-  <%= @event.host.username %>
-</p>
-
-<p>
-  <strong>Confirmed Guests (<%= @event.guests.count %>) :</strong>
-  <% @event.guests.order(:username).each do |guest| %>
-    <div class='invitation-list-item ACCEPTED'>
-      <li><%= link_to guest.username, guest %></li>
-      <i class="fas fa-check"></i>
-    </div>
-  <% end %>
-</p>
-
-<% if current_user.try(:id) == @event.host_id %>
-  <p>
-    <strong>All Invitations:</strong>
+<div class='event-show'>
+  <div class='name-show'><%= @event.name %></div>
+  <div class='basic-info-show'>
+    <%= @event.date_and_time %> •
+    <%= @event.location %> •
+    Hosted by <%= @event.host_name %>
+  </div>
+  <div class='description'><%= @event.description %></div>
+  <hr class='event-show-line'>
+  <div>
+    <div class='list-category'>Confirmed Guests (<%= @event.guests.count %>):</div>
+      <% @event.guests.order(:username).each do |guest| %>
+        <div class='ACCEPTED invitation-list-item'>
+          <li><%= link_to guest.username, guest %></li>
+          <i class="fas fa-check"></i>
+        </div>
+      <% end %>
+  </div>
+  <div>
+    <div class='list-category'>All Invitations (<%= @event.invitations.count %>):</div>
     <% @event.invitations.includes(:recipient).order(:username).references(:recipient).each do |invitation| %>
       <div class="invitation-list-item <%= invitation.rsvp %>">
         <li><%= link_to invitation.recipient.username, user_path(invitation.recipient_id) %></li>
@@ -48,13 +30,15 @@
         <% end %>
       </div>
     <% end %>
-  </p>
-<% end %>
-<br>
+  </div>
+  <% if current_user.try(:id) == @event.host_id %>
+    <div>
+      <%= link_to 'Edit', edit_event_path(@event) %> |
+      <%= link_to 'Update Invitations', edit_event_invitations_path(@event) %> |
+      <%= link_to 'Delete Event', event_path(@event), method: :delete, data: { confirm: 'Are you sure?'} %>
+    </div>
+  <% end %>
+</div>
 
-<% if @event.host_id == current_user.try(:id) %>
-  <%= link_to 'Edit', edit_event_path(@event) %> |
-  <%= link_to 'Update Invitations', edit_event_invitations_path(@event) %> |
-  <%= link_to 'Delete Event', event_path(@event), method: :delete, data: { confirm: 'Are you sure?'} %> |
-<% end %>
-<%= link_to 'Back', events_path %>
+<br>
+<%= link_to 'Back', events_path, class: 'end-link' %>
