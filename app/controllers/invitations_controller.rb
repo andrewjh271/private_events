@@ -49,17 +49,17 @@ class InvitationsController < ApplicationController
 
   def accept
     @invitation.update(rsvp: 'ACCEPTED')
-    redirect_back fallback_location: user_path
+    redirect_to profile_path(anchor: 'invitations')
   end
 
   def pend
     @invitation.update(rsvp: 'PENDING')
-    redirect_back fallback_location: user_path
+    redirect_to profile_path(anchor: 'invitations')
   end
 
   def decline
     @invitation.update(rsvp: 'DECLINED')
-    redirect_back fallback_location: user_path
+    redirect_to profile_path(anchor: 'invitations')
   end
 
   private

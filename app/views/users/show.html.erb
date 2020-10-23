@@ -14,7 +14,7 @@
 </div>
 
 <% if current_user.try(:id) == @user.id %>
-  <div class='invitations-container'>
+  <div id='invitations' class='invitations-container'>
     <h3 class='invitation-category'>Current Invitations</h3>
     <%= render @user.invitations.upcoming.includes(:event).order(:date), upcoming: true %>
     <h3 class='invitation-category'>Past Invitations</h3>
