@@ -20,27 +20,31 @@ ActiveRecord::Base.transaction do
   User.destroy_all
 
   @users = []
-  25.times do |i|
-    @users[i] = User.create(
-      username: Faker::Internet.username,
-      email: Faker::Internet.email,
+  28.times do
+    username = Faker::Internet.username
+    @users << User.create(
+      username: username,
+      email: "#{username}@gmail.com",
       password: 'mandolin'
     )
   end
 
   @events = []
-  30.times do |i|
+  31.times do
     event_date = Faker::Time.between(from: 3.months.ago, to: 1.year.from_now)
     create_date = Faker::Time.between(from: 1.year.ago, to: event_date)
-    @events[i] = Event.create(
+    location = rand < 0.7 ? Faker::Movies::HitchhikersGuideToTheGalaxy.location : Faker::Address.city
+    description = rand < 0.7 ? Faker::Movies::HitchhikersGuideToTheGalaxy.quote : Faker::GreekPhilosophers.quote
+    @events << Event.new(
       name: Faker::Lorem.sentence(word_count: 3, supplemental: true, random_words_to_add: 2),
-      location: Faker::Address.city,
+      location: location,
       date: event_date,
-      description: Faker::GreekPhilosophers.quote,
+      description: description,
       host: @users[rand(@users.length)],
       created_at: create_date,
       updated_at: create_date
     )
+    @events.last.save(validate: false)
   end
 
   # Sample User
@@ -50,31 +54,49 @@ ActiveRecord::Base.transaction do
     password: 'password'
   )
   # Sample Event
-  Event.create(
-    name: 'Ice Cream Social',
-    location: Faker::Address.city,
+  @events << Event.create(
+    name: 'Giraffe Convention',
+    location: 'San Diego Zoo',
     date: 1.year.from_now,
     description: Faker::GreekPhilosophers.quote,
     host: @example_user
   )
+  8.times do
+    event_date = Faker::Time.between(from: 5.months.ago, to: 1.year.from_now)
+    create_date = Faker::Time.between(from: 1.year.ago, to: event_date)
+    location = rand < 0.7 ? Faker::Movies::HitchhikersGuideToTheGalaxy.location : Faker::Address.city
+    description = rand < 0.7 ? Faker::Movies::HitchhikersGuideToTheGalaxy.quote : Faker::GreekPhilosophers.quote
+    @events << Event.new(
+      name: Faker::Lorem.sentence(word_count: 3, supplemental: true, random_words_to_add: 2),
+      location: location,
+      date: event_date,
+      description: description,
+      host: @example_user,
+      created_at: create_date,
+      updated_at: create_date
+    )
+    @events.last.save(validate: false)
+  end
 
+  # Invitations for events
   @events.each do |event|
-    event.invitations.create(recipient: @example_user)
+    event.invitations.create(recipient: @example_user) if rand < 0.75
     random_user_reset!
-    rand(@users.length).times do
+    rand(12..@users.length).times do
       event.invitations.create(recipient: random_user)
     end
   end
 
+  # RSVPs for invitations
+  @users << @example_user
   @users.each do |user|
     user.invitations.each do |invitation|
       random = rand
-      if random < 0.5
+      if random < 0.45
         invitation.update(rsvp: 'ACCEPTED')
-      elsif random < 0.8
+      elsif random < 0.75
         invitation.update(rsvp: 'DECLINED')
       end
     end
   end
-
 end
