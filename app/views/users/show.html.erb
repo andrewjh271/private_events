@@ -21,5 +21,5 @@
     <%= render @user.invitations.past.includes(:event).order(date: :desc), upcoming: false %>
   </div>
 <br>
-<%= link_to 'Edit Account', edit_user_registration_path %>
+<%= link_to 'Edit Account', edit_user_registration_path, class: 'end-link' %>
 <% end %>

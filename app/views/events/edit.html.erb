@@ -2,5 +2,7 @@
 
 <%= render 'form', event: @event %>
 
-<%= link_to 'Back', @event %> |
-<%= link_to 'Cancel', events_path %>
+<div class='end-link'>
+  <%= link_to 'Cancel', @event %> |
+  <%= link_to 'Home', events_path %>
+</div>

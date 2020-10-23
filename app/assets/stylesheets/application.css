@@ -27,9 +27,7 @@ header {
   display: flex;
   justify-content: space-between;
   height: 7vh;
-  /* background-color: #4267b2; */
   background-color: #9471af;
-  /* margin-bottom: 2vh; */
   padding: 5px;
   box-sizing: border-box;
 }
@@ -69,6 +67,8 @@ header {
   min-height: 92vh;
   padding: 1vh 5vw 2vw 5vw;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 /* flash */
@@ -158,4 +158,10 @@ h1 {
   padding: 8px;
   font-family: 'Piazzolla', serif;
   font-size: 3em;
+}
+
+/* e.g. 'back' link at end of page */
+
+.end-link {
+  margin: auto 0 0 0;
 }
