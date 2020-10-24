@@ -1,6 +1,6 @@
 # Private Events
 
-Created as part of the Odin Project curriculum. View live page.
+Created as part of the Odin Project curriculum. View [live page](https://salty-peak-66278.herokuapp.com/events).
 
 For full functionality sign up or login with *odin@example.com* and *password*.
 
