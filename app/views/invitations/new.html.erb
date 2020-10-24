@@ -8,9 +8,8 @@
 
   <% User.all.each do |user| %>
     <div class='checkbox'>
-      <%= f.check_box("recipient[#{user.id}]", { checked: @event.invitations.exists?(recipient_id: user.id) }) %>
+      <%= f.check_box("recipient[#{user.id}]") %>
       <%= user.username %>
-      <%#= f.label(user.id, user.username) %>
     </div>
   <% end %>
   <br>
