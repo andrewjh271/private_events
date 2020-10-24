@@ -11,8 +11,8 @@
 #
 FactoryBot.define do
   factory :invitation do
-    rsvp { "MyString" }
-    event { nil }
-    recipient { nil }
+    rsvp { 'ACCEPTED' }
+    event { create(:event) }
+    recipient { create(:user) }
   end
 end

@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: :new
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :require_host!, except: [:index, :show, :new, :create]
 
@@ -58,7 +58,7 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     respond_to do |format|
-      format.html { redirect_to events_url, notice: 'Event was successfully deleted.' }
+      format.html { redirect_to root_url, notice: 'Event was successfully deleted.' }
       format.json { head :no_content }
     end
   end

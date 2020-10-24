@@ -13,10 +13,10 @@
 #
 FactoryBot.define do
   factory :event do
-    name { "MyString" }
-    date { "2020-10-19" }
-    location { "MyString" }
-    description { "MyText" }
-    host { nil }
+    name { "Name" }
+    date { 1.year.from_now }
+    location { "Location" }
+    description { "Description" }
+    host { create(:user) }
   end
 end

@@ -14,7 +14,7 @@
 class Event < ApplicationRecord
   validates :name, :date, :location, presence: true
   validates :name, uniqueness: true
-  validate :starts_in_the_future
+  validate :starts_in_the_future, if: -> { date }
 
   belongs_to :host, class_name: :User
   has_many :invitations, dependent: :destroy

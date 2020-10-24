@@ -12,5 +12,16 @@
 require 'rails_helper'
 
 RSpec.describe Invitation, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject(:invitation) { FactoryBot.build(:invitation) }
+
+  describe 'validations' do
+    it { should validate_presence_of(:rsvp) }
+    it { should validate_inclusion_of(:rsvp).in_array(%w[ACCEPTED PENDING DECLINED]) }
+    it { should validate_uniqueness_of(:event_id).scoped_to(:recipient_id) }
+  end
+
+  describe 'associations' do
+    it { should belong_to(:event) }
+    it { should belong_to(:recipient) }
+  end
 end

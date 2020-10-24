@@ -15,13 +15,23 @@
 RSpec.describe "/events", type: :request do
   # Event. As you add validations to Event, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+  let(:user) { FactoryBot.create(:user) }
+
+  let(:valid_attributes) { {
+    name: 'Book Swap',
+    date: '2022/11/11',
+    location: 'San Diego Zoo',
+    host: user }
   }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+  let(:invalid_attributes) { {
+    name: 'Book Swap',
+    date: '2019/11/11',
+    host: user }
   }
+
+  # 'config.include Devise::Test::IntegrationHelpers, type: :request' added in spec/rails_helper.rb to allow
+  # #sign_in, a Devise ControllerHelper method that 'bypasses any warden authentication callback.'
 
   describe "GET /index" do
     it "renders a successful response" do
@@ -41,6 +51,7 @@ RSpec.describe "/events", type: :request do
 
   describe "GET /new" do
     it "renders a successful response" do
+      sign_in user
       get new_event_url
       expect(response).to be_successful
     end
@@ -48,6 +59,7 @@ RSpec.describe "/events", type: :request do
 
   describe "GET /edit" do
     it "render a successful response" do
+      sign_in user
       event = Event.create! valid_attributes
       get edit_event_url(event)
       expect(response).to be_successful
@@ -55,6 +67,8 @@ RSpec.describe "/events", type: :request do
   end
 
   describe "POST /create" do
+    before(:each) { sign_in user }
+
     context "with valid parameters" do
       it "creates a new Event" do
         expect {
@@ -64,7 +78,7 @@ RSpec.describe "/events", type: :request do
 
       it "redirects to the created event" do
         post events_url, params: { event: valid_attributes }
-        expect(response).to redirect_to(event_url(Event.last))
+        expect(response).to redirect_to(new_event_invitations_url(Event.last))
       end
     end
 
@@ -83,16 +97,22 @@ RSpec.describe "/events", type: :request do
   end
 
   describe "PATCH /update" do
+    before(:each) { sign_in user }
+
     context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+      let(:new_attributes) { {
+        name: 'Festival of Lights',
+        date: '2024/12/9',
+        location: 'LACMA', }
       }
 
       it "updates the requested event" do
         event = Event.create! valid_attributes
         patch event_url(event), params: { event: new_attributes }
         event.reload
-        skip("Add assertions for updated state")
+        expect(event.name).to eq('Festival of Lights')
+        expect(event.date).to eq('2024/12/9')
+        expect(event.location).to eq('LACMA')
       end
 
       it "redirects to the event" do
@@ -113,6 +133,8 @@ RSpec.describe "/events", type: :request do
   end
 
   describe "DELETE /destroy" do
+    before(:each) { sign_in user }
+
     it "destroys the requested event" do
       event = Event.create! valid_attributes
       expect {
@@ -123,7 +145,7 @@ RSpec.describe "/events", type: :request do
     it "redirects to the events list" do
       event = Event.create! valid_attributes
       delete event_url(event)
-      expect(response).to redirect_to(events_url)
+      expect(response).to redirect_to(root_url)
     end
   end
 end
