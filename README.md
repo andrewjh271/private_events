@@ -40,7 +40,7 @@ I had to use `user.username` instead of `f.label(user.id, user.username)` for th
 
 I used a scaffold generator for the `Event` model, which again proved helpful and educational.
 
-For this project I was a little picker about the styling, and decided I didn't want the `field-with-error` class applied on `label` elements. To avoid that particular piece of Rails magic I just went with the raw html `<label for='event_name'>Name</label>` instead of `<%#= form.label :name %>`.
+For this project I was a little pickier about the styling, and decided I didn't want the `field-with-error` class applied on `label` elements. To avoid that particular piece of Rails magic I just went with the raw html `<label for='event_name'>Name</label>` instead of `<%#= form.label :name %>`.
 
 ##### Testing
 
