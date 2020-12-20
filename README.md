@@ -12,11 +12,13 @@ Event hosts can only uninvite users who have not yet confirmed their attendance 
 
 ### Thoughts
 
-One of the main challenges I ran into was deciding how to allow event hosts to invite guests. With my current form skillset a checkbox seemed to be the best option, but ideally there would be a text field that autocompletes from the database of users. I struggled for a long time to try for an efficient way of prechecking the box of any user who was already invited:
+One of the main challenges I ran into was deciding how to allow event hosts to invite guests. With my current form-related skillset a checkbox seemed to be the best option, but ideally there would be a text field that autocompletes from the database of users. I struggled for a long time to try for an efficient way of prechecking the box of any user who was already invited:
 
 ```ruby
 User.order(:username).includes(:invitations).each do |user|
 { checked: user.invitations.any? { |inv| inv.event_id == @event.id } } # Ruby; no index
+  
+User.order(:username).includes(:invitations).each do |user|
 { checked: user.invitations.exists?(event: @event) } # n+1 query
   
 User.all.order(:username)
@@ -25,6 +27,7 @@ User.all.order(:username)
   .references(:invitations).each #where clause filters users, not invitations
 
 { checked: @event.invitations.exists?(recipient_id: user.id) }) # n+1 query
+
 { checked: @event.invitations.any? { |inv| inv.recipient_id == user.id } } # Ruby; no index
 
 temp_invitations = @event.invitations.pluck(:recipient_id)
@@ -34,17 +37,17 @@ temp_invitations = @event.invitations.pluck(:recipient_id)
 
 My eventual solution has the advantages of only making one query, storing a relatively lightweight array of `recipient_id` integers, and diminishing average search times as found elements are deleted from the array. It was much faster than any alternative I tried. Still, it doesn't feel like the most elegant solution.
 
-Another big disadvantage of the checkbox approach for invitations was that I need to handle every username every time, since there's no way to know which ones changed and target only those. For a large database of users this implementation would need to improve.
+Another big disadvantage of the checkbox approach for invitations was that I need to handle every invitation for an event any time its invitation list is updated, since there's no way to know which ones changed and target only those. For a large database of users this implementation would need to improve.
 
 I had to use `user.username` instead of `f.label(user.id, user.username)` for the checkbox labels in order to get them to display inline.
 
-I used a scaffold generator for the `Event` model, which again proved helpful and educational.
+I used a scaffold generator for the `Event` model, which proved helpful and educational.
 
 For this project I was a little pickier about the styling, and decided I didn't want the `field-with-error` class applied on `label` elements. To avoid that particular piece of Rails magic I just went with the raw html `<label for='event_name'>Name</label>` instead of `<%#= form.label :name %>`.
 
 ##### Testing
 
-I wrote tests from scratch for `spec/controllers/events_controller_spec.rb`, and  `spec/models/*` with techniques I learned from App Academy, using the `shoulda-matchers`, `rails-controller-testing`, and `factory-bot-rails` gems. In projects where I wrote my own authorization I had been using this helper method to stub methods related to authentication:
+I wrote tests for `spec/controllers/events_controller_spec.rb`, and  `spec/models/*` using the `shoulda-matchers`, `rails-controller-testing`, and `factory-bot-rails` gems. In projects where I wrote my own authorization I had been using this helper method to stub methods related to authentication:
 
 ```ruby
 def login(user)
@@ -61,7 +64,7 @@ config.include Devise::Test::ControllerHelpers, type: :view
 config.include Devise::Test::ControllerHelpers, type: :controller
 ```
 
-Then I could use the simple `sign_in user`.
+Then I could use the simple method Devise provides: `sign_in user`.
 
 Because `rspec-rails` was already bundled when I generated the `Event` scaffolding, a bunch of tests were generated in the `spec` folder. I decided to look into these and make them pass as well since they contained techniques I hadn't seen before.
 
