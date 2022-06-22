@@ -11,7 +11,7 @@ def random_user
 end
 
 def random_user_reset!(n = @users.length)
-  @random_users = (0..n).to_a.shuffle
+  @random_users = (0...n).to_a.shuffle
 end
 
 ActiveRecord::Base.transaction do
