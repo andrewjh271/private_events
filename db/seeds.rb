@@ -19,6 +19,10 @@ ActiveRecord::Base.transaction do
   Event.destroy_all
   User.destroy_all
 
+  ActiveRecord::Base.connection.reset_pk_sequence!('invitations')
+  ActiveRecord::Base.connection.reset_pk_sequence!('events')
+  ActiveRecord::Base.connection.reset_pk_sequence!('users')
+
   @users = []
   28.times do
     username = Faker::Internet.username
