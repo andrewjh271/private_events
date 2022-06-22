@@ -15,6 +15,7 @@ class Invitation < ApplicationRecord
   validates :rsvp, presence: true
   validates :rsvp, inclusion: { in: %w[ACCEPTED PENDING DECLINED] }, if: -> { rsvp }
   validates :event_id, uniqueness: { scope: :recipient_id }
+  validate :no_host_invite
 
   belongs_to :event
   belongs_to :recipient, class_name: :User
@@ -42,5 +43,12 @@ class Invitation < ApplicationRecord
 
   def ensure_rsvp
     rsvp ||= 'PENDING'
+  end
+
+  def no_host_invite
+    event = Event.find(event_id);
+    if event.host_id == recipient_id
+      errors[:recipient] << 'Host cannot invite themselves'
+    end
   end
 end

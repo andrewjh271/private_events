@@ -83,11 +83,12 @@ ActiveRecord::Base.transaction do
   end
 
   # Invitations for events
+  # `create` used over `create!` so `no_host_invite` validation will fail silently
   @events.each do |event|
-    event.invitations.create!(recipient: @example_user) if rand < 0.75
+    event.invitations.create(recipient: @example_user) if rand < 0.75
     random_user_reset!
     rand(12..@users.length).times do
-      event.invitations.create!(recipient: random_user)
+      event.invitations.create(recipient: random_user)
     end
   end
 
