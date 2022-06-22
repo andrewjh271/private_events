@@ -22,7 +22,7 @@ ActiveRecord::Base.transaction do
   @users = []
   28.times do
     username = Faker::Internet.username
-    @users << User.create(
+    @users << User.create!(
       username: username,
       email: "#{username}@gmail.com",
       password: 'mandolin'
@@ -44,17 +44,17 @@ ActiveRecord::Base.transaction do
       created_at: create_date,
       updated_at: create_date
     )
-    @events.last.save(validate: false)
+    @events.last.save!(validate: false) # bypasses `starts_in_the_future` validation
   end
 
   # Sample User
-  @example_user = User.create(
+  @example_user = User.create!(
     username: 'odin',
     email: 'odin@example.com',
     password: 'password'
   )
   # Sample Event
-  @events << Event.create(
+  @events << Event.create!(
     name: 'Giraffe Convention',
     location: 'San Diego Zoo',
     date: 1.year.from_now,
@@ -75,15 +75,15 @@ ActiveRecord::Base.transaction do
       created_at: create_date,
       updated_at: create_date
     )
-    @events.last.save(validate: false)
+    @events.last.save!(validate: false) # bypasses `starts_in_the_future` validation
   end
 
   # Invitations for events
   @events.each do |event|
-    event.invitations.create(recipient: @example_user) if rand < 0.75
+    event.invitations.create!(recipient: @example_user) if rand < 0.75
     random_user_reset!
     rand(12..@users.length).times do
-      event.invitations.create(recipient: random_user)
+      event.invitations.create!(recipient: random_user)
     end
   end
 
