@@ -13,7 +13,7 @@
 #
 FactoryBot.define do
   factory :event do
-    name { "Name" }
+    name { Faker::Sports::Football.competition }
     date { 1.year.from_now }
     location { "Location" }
     description { "Description" }

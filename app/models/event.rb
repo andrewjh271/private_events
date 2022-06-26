@@ -45,7 +45,7 @@ class Event < ApplicationRecord
   private
 
   def starts_in_the_future
-    if date < Date.today
+    if date < Date.current
       errors[:date] << 'Event date must be in the future.'
     end
   end

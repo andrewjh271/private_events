@@ -18,6 +18,12 @@ RSpec.describe Invitation, type: :model do
     it { should validate_presence_of(:rsvp) }
     it { should validate_inclusion_of(:rsvp).in_array(%w[ACCEPTED PENDING DECLINED]) }
     it { should validate_uniqueness_of(:event_id).scoped_to(:recipient_id) }
+
+    it 'should validate that host cannot invite themself' do
+      event = FactoryBot.create(:event)
+      invalid_invitation = FactoryBot.build(:invitation, event: event, recipient: event.host)
+      expect(invalid_invitation.valid?).to be false
+    end
   end
 
   describe 'associations' do
