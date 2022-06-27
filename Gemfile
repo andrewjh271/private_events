@@ -13,11 +13,11 @@ gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', '~> 4.0'
+gem 'webpacker', '~> 5.4', '>= 5.4.3'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.7'
+gem 'jbuilder', '~> 2.11', '>= 2.11.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
@@ -27,17 +27,17 @@ gem 'jbuilder', '~> 2.7'
 # gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.2', require: false
+gem 'bootsnap', '~> 1.12', require: false
 
-gem 'devise', '~> 4.7', '>= 4.7.3'
-gem 'faker', '~> 2.14'
+gem 'devise', '~> 4.8', '>= 4.8.1'
+gem 'faker', '~> 2.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-rails', '~> 0.3.9'
-  gem 'rspec-rails', '~> 4.0', '>= 4.0.1'
-  gem 'factory_bot_rails', '~> 6.1'
+  gem 'rspec-rails', '~> 5.1', '>= 5.1.2'
+  gem 'factory_bot_rails', '~> 6.2'
 end
 
 group :development do
@@ -46,15 +46,15 @@ group :development do
   gem 'listen', '~> 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'better_errors', '~> 2.8', '>= 2.8.3'
+  gem 'spring-watcher-listen', '~> 2.0', '>= 2.0.1'
+  gem 'better_errors', '~> 2.9', '>= 2.9.1'
   gem 'binding_of_caller', '~> 1.0'
-  gem 'annotate', '~> 3.1', '>= 3.1.1'
+  gem 'annotate', '~> 3.2'
 end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
+  gem 'capybara', '~> 3.37', '>= 3.37.1'
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
@@ -63,7 +63,7 @@ group :test do
   # gem 'faker', '~> 2.14'
   
   gem 'launchy', '~> 2.5'
-  gem 'shoulda-matchers', '~> 4.4', '>= 4.4.1'
+  gem 'shoulda-matchers', '~> 5.1'
   gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
 end
 
