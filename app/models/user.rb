@@ -20,18 +20,24 @@ class User < ApplicationRecord
 
   has_many :events,
     foreign_key: :host_id,
+    inverse_of: :host,
     dependent: :destroy
 
   has_many :invitations,
     foreign_key: :recipient_id,
+    inverse_of: :recipient,
     dependent: :destroy
   
   has_many :confirmations,
     -> { where rsvp: 'ACCEPTED' },
     class_name: :Invitation,
-    foreign_key: :recipient_id
+    foreign_key: :recipient_id,
+    inverse_of: :recipient
   
   has_many :commitments,
     through: :confirmations,
     source: :event
-  end
+end
+
+# adding inverse_of when foreign_key is specificed or a scope is added
+# https://guides.rubyonrails.org/association_basics.html#bi-directional-associations

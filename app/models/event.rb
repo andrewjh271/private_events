@@ -17,11 +17,13 @@ class Event < ApplicationRecord
   validate :starts_in_the_future, if: -> { date }
 
   belongs_to :host, class_name: :User
+
   has_many :invitations, dependent: :destroy
+  
   has_many :confirmations,
     -> { where rsvp: 'ACCEPTED' },
     class_name: :Invitation,
-    foreign_key: :event_id
+    inverse_of: :event
 
   has_many :guests,
     through: :confirmations,
