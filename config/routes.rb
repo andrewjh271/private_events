@@ -9,11 +9,10 @@ Rails.application.routes.draw do
   get 'about', to: 'application#about'
   
   resources :events do
-    # resources :invitations, only: :new
-    resource :invitations, except: :index
+    resource :invitations, only: [:new, :edit, :update, :create]
   end
 
-  resources :invitations, only: [:destroy] do
+  resources :invitations, only: [] do
     member do
       post 'accept'
       post 'pend'
