@@ -20,7 +20,7 @@
     <div class='list-category'>All Invitations: (<%= @event.invitations.count %>)</div>
     <% @event.invitations.includes(:recipient).order(:username).references(:recipient).each do |invitation| %>
       <div class="invitation-list-item <%= invitation.rsvp %>">
-        <li><%= link_to invitation.recipient.username, user_path(invitation.recipient_id) %></li>
+        <li><%= link_to invitation.recipient.username, user_path(invitation.recipient) %></li>
         <% if invitation.rsvp == 'ACCEPTED' %>
           <i class="fas fa-check"></i>
         <% elsif invitation.rsvp == 'PENDING' %>
