@@ -8,7 +8,7 @@ RSpec.describe "events/edit", type: :view do
     @event = Event.create!(
       name: "Event 1",
       location: "Location",
-      date: '2022/11/11',
+      date: '2032/11/11',
       description: "MyText",
       host: user
     )

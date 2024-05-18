@@ -19,7 +19,7 @@ RSpec.describe "/events", type: :request do
 
   let(:valid_attributes) { {
     name: 'Book Swap',
-    date: '2022/11/11',
+    date: '2032/11/11',
     location: 'San Diego Zoo',
     host: user }
   }

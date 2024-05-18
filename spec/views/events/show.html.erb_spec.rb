@@ -8,7 +8,7 @@ RSpec.describe "events/show", type: :view do
     @event = Event.create!(
       name: "Event 1",
       location: "Space Needle",
-      date: '2022/11/11',
+      date: '2032/11/11',
       description: "MyText",
       host: user
     )
@@ -22,7 +22,7 @@ RSpec.describe "events/show", type: :view do
     render
     expect(rendered).to match(/Event 1/)
     expect(rendered).to match(/Space Needle/)
-    expect(rendered).to match(/Nov 11 2022 12:00am/)
+    expect(rendered).to match(/Nov 11 2032 12:00am/)
     expect(rendered).to match(/MyText/)
     expect(rendered).to match(/#{user.username}/)
   end

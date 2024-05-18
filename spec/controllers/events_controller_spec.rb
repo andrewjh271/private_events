@@ -30,7 +30,7 @@ RSpec.describe EventsController, type: :controller do
     context 'without authentication' do
       it 'requires current_user' do
         post :create, params: { event: { name: 'Book Swap',
-                                         date: '2022/11/11',
+                                         date: '2032/11/11',
                                          location: 'San Diego Zoo',
                                          host: user } }
         expect(response).to redirect_to(new_user_session_url)
@@ -42,7 +42,7 @@ RSpec.describe EventsController, type: :controller do
       before(:each) { sign_in user }
 
       it 'validates the presence of name' do
-        post :create, params: { event: { date: '2022/11/11',
+        post :create, params: { event: { date: '2032/11/11',
                                          location: 'San Diego Zoo',
                                          host: user } }
         expect(response).to render_template(:new)
@@ -56,7 +56,7 @@ RSpec.describe EventsController, type: :controller do
       end
 
       it 'validates the presence of location' do
-        post :create, params: { event: { date: '2022/11/11',
+        post :create, params: { event: { date: '2032/11/11',
                                          name: 'San Diego Zoo',
                                          host: user } }
         expect(response).to render_template(:new)
@@ -74,7 +74,7 @@ RSpec.describe EventsController, type: :controller do
       before(:each) { sign_in user }
 
       it 'redirects to new event invitations page on success' do
-        post :create, params: { event: { date: '2022/11/11',
+        post :create, params: { event: { date: '2028/11/11',
                                          name: 'Book Swap',
                                          location: 'San Diego Zoo',
                                          host: user } }
