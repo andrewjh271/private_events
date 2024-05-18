@@ -8,16 +8,16 @@
   <div class='description'><%= @event.description %></div>
   <hr class='event-show-line'>
   <div>
-    <div class='list-category'>Confirmed Guests (<%= @event.guests.count %>):</div>
-      <% @event.guests.order(:username).each do |guest| %>
-        <div class='ACCEPTED invitation-list-item'>
-          <li><%= link_to guest.username, guest %></li>
-          <i class="fas fa-check"></i>
-        </div>
-      <% end %>
+    <div class='list-category'>Confirmed Guests: (<%= @event.guests.length %>)</div>
+    <% @event.guests.each do |guest| %>
+      <div class='ACCEPTED invitation-list-item'>
+        <li><%= link_to guest.username, guest %></li>
+        <i class="fas fa-check"></i>
+      </div>
+    <% end %>
   </div>
   <div>
-    <div class='list-category'>All Invitations (<%= @event.invitations.count %>):</div>
+    <div class='list-category'>All Invitations: (<%= @event.invitations.count %>)</div>
     <% @event.invitations.includes(:recipient).order(:username).references(:recipient).each do |invitation| %>
       <div class="invitation-list-item <%= invitation.rsvp %>">
         <li><%= link_to invitation.recipient.username, user_path(invitation.recipient_id) %></li>
