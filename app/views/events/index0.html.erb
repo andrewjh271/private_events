@@ -23,7 +23,7 @@
         <td><%= event.description %></td>
         <td><%= event.host.username %></td>
         <td><%= link_to 'Show', event %></td>
-        <% if event.host_id == current_user.try(:id) %>
+        <% if event.host == current_user %>
           <td><%= link_to 'Edit', edit_event_path(event) %></td>
           <td><%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>

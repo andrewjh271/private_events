@@ -31,7 +31,7 @@
       </div>
     <% end %>
   </div>
-  <% if current_user.try(:id) == @event.host_id %>
+  <% if current_user == @event.host %>
     <div>
       <%= link_to 'Edit', edit_event_path(@event) %> |
       <%= link_to 'Update Invitations', edit_event_invitations_path(@event) %> |

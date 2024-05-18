@@ -77,14 +77,14 @@ class InvitationsController < ApplicationController
   end
 
   def require_host!
-    unless current_user.try(:id) == @event.host_id
+    unless current_user == @event.host
       flash[:alert] = 'You are not authorized to edit invitations for this event!'
       redirect_to root_url
     end
   end
 
   def require_recipient!
-    unless current_user.try(:id) == @invitation.recipient_id
+    unless current_user == @invitation.recipient
       flash[:alert] = 'You are not authorized to respond to this invitation!'
       redirect_to root_url
     end

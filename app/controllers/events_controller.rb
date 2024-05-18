@@ -76,7 +76,7 @@ class EventsController < ApplicationController
     end
 
     def require_host!
-      unless current_user.try(:id) == @event.host_id
+      unless current_user == @event.host
         flash[:alert] = 'You are not authorized to edit this event!'
         redirect_to root_url
       end
