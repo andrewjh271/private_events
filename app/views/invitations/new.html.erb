@@ -6,7 +6,8 @@
 <%= form_with(url: event_invitations_path(@event), local: true) do |f| %>
   <%= hidden_field_tag(:event_id, @event.id) %>
 
-  <% User.all.each do |user| %>
+  <% User.order(:username).each do |user| %>
+    <% next if user == @event.host %>
     <div class='checkbox'>
       <%= f.check_box("recipient[#{user.id}]") %>
       <%= user.username %>
