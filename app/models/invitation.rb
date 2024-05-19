@@ -48,7 +48,7 @@ class Invitation < ApplicationRecord
   def no_host_invite
     event = Event.find(event_id)
     if event.host_id == recipient_id
-      errors.add(:base, :blank, message: 'Host cannot invite themself')
+      errors.add(:base, 'Host cannot invite themself')
     end
   end
 end
