@@ -1,13 +1,13 @@
 .invitations-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   width: 85%;
   margin: auto;
   grid-gap: 1vh;
 }
 
 .invitation-category {
-  grid-column: 1 / 6;
+  grid-column: 1 / -1;
   margin: 1vh;
   font-family: 'PT Sans', sans-serif;
   font-size: 1.3em;
@@ -30,9 +30,17 @@
 
 .rsvp-actions {
   display: flex;
-  justify-content: space-between;
   background-color: transparent;
-  // padding: 0.8vw 1vw 0.8vw 1vw;
+  gap: 5px;
+
+  .button_to,
+  .past-action {
+    flex-grow: 1;
+
+    * {
+      width: 100%;
+    }
+  }
 }
 
 .rsvp {
@@ -45,9 +53,7 @@
 }
 
 .current-status {
-  background: rgba(161, 161, 233, 0.863);
-  // box-shadow: 1px 3px 8px #6681a7d1;
-  
+  background: rgba(161, 161, 233, 0.863);  
 }
 
 .current-status:hover {
@@ -59,7 +65,7 @@
 
 input[type="submit"] {
   border: none;
-  padding: 0.8vw 1vw 0.8vw 1vw;
+  padding: 0.8vw 0 0.8vw 0;
 
   font-family: verdana, arial, helvetica, sans-serif;
     font-size: 13px;
@@ -75,8 +81,9 @@ input[type="submit"]:hover {
 }
 
 .past-action {
-  padding: 0.8vw 1vw 0.8vw 1vw;
+  padding: 0.8vw 0 0.8vw 0;
   box-shadow: 0px 0px 5px 1px #6681a7d1;
+  text-align: center;
 }
 
 .past-action:hover {

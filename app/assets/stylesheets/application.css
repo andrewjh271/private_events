@@ -28,7 +28,6 @@ header {
   justify-content: space-between;
   height: 7vh;
   background-color: #9471af;
-  padding: 5px;
   box-sizing: border-box;
 }
 
@@ -59,6 +58,10 @@ header {
 
 .border-right {
   border-right: 1px solid rgba(0, 0, 0, 0.171);
+}
+
+.border-left {
+  border-left: 1px solid rgba(0, 0, 0, 0.171);
 }
 
 /* container for pages other than root */
