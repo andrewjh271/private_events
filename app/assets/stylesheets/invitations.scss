@@ -87,3 +87,7 @@ input[type="submit"]:hover {
   background: rgba(161, 161, 233, 0.863);
   // box-shadow: 1px 3px 8px #6681a7d1;
 }
+
+.checkbox label {
+  display: inline;
+}

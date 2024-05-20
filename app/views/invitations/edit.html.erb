@@ -11,7 +11,7 @@
     <% next if user == @event.host %>
     <div class='checkbox'>
       <%= f.check_box("recipient[#{user.id}]", { checked: !!temp_invitations.delete(user.id) } ) %>
-      <%= user.username %>
+      <%= f.label "recipient[#{user.id}]", user.username %>
     </div>
   <% end %>
   <br>
